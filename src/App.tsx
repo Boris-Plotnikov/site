@@ -84,7 +84,7 @@ export default function App() {
                   {p.demo && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">● live</span>}
                 </div>
                 <p className="mt-2 text-slate-700">{text.tagline}</p>
-                <ul className="mt-3 space-y-1 text-sm text-muted">{text.points.map((x) => <li key={x}>— {x}</li>)}</ul>
+                <ul className="mt-3 space-y-1 text-sm text-muted">{text.points.map((x) => <li key={x}>- {x}</li>)}</ul>
                 <div className="mt-4 flex flex-wrap gap-1.5">{p.stack.map((s) => <span key={s} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium">{s}</span>)}</div>
                 <div className="mt-auto flex flex-wrap gap-3 pt-5 text-sm font-semibold">
                   {p.demo && <a href={p.demo} className="text-accent hover:underline">{t.live} →</a>}
