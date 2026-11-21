@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Lang, PROJECTS, TEXT } from "./content";
 
 const GITHUB = "https://github.com/Boris-Plotnikov";
-const EMAIL = "hello@boris-plotnikov.click";
+const EMAIL = "boris.a.plotnikov@gmail.com";
 
 function initialLang(): Lang {
   try {
