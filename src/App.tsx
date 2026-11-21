@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Lang, PROJECTS, TEXT } from "./content";
+import { Lang, PROFILE, PROJECTS, TEXT } from "./content";
 
-const GITHUB = "https://github.com/Boris-Plotnikov";
-const EMAIL = "boris.a.plotnikov@gmail.com";
+const GITHUB = PROFILE.github;
+const EMAIL = PROFILE.email;
 
-function initialLang(): Lang {
+function preferredLang(): Lang {
   try {
     const saved = localStorage.getItem("lang");
     if (saved === "en" || saved === "de") return saved;
@@ -14,8 +14,12 @@ function initialLang(): Lang {
 }
 
 export default function App() {
-  const [lang, setLang] = useState<Lang>(initialLang);
+  const [lang, setLang] = useState<Lang>("en");
   const t = TEXT[lang];
+
+  useEffect(() => {
+    setLang(preferredLang());
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -84,12 +88,12 @@ export default function App() {
                   {p.demo && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800">● live</span>}
                 </div>
                 <p className="mt-2 text-slate-700">{text.tagline}</p>
-                <ul className="mt-3 space-y-1 text-sm text-muted">{text.points.map((x) => <li key={x}>- {x}</li>)}</ul>
+                <ul className="mt-3 space-y-1 text-sm text-muted">{text.points.map((x) => <li key={x}>{`- ${x}`}</li>)}</ul>
                 <div className="mt-4 flex flex-wrap gap-1.5">{p.stack.map((s) => <span key={s} className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium">{s}</span>)}</div>
                 <div className="mt-auto flex flex-wrap gap-3 pt-5 text-sm font-semibold">
-                  {p.demo && <a href={p.demo} className="text-accent hover:underline">{t.live} →</a>}
-                  {p.extra && <a href={p.extra.href} className="text-accent hover:underline">{p.extra.label} →</a>}
-                  <a href={`${GITHUB}/${p.key}`} className="text-muted hover:text-ink">{t.code} ↗</a>
+                  {p.demo && <a href={p.demo} className="text-accent hover:underline">{`${t.live} →`}</a>}
+                  {p.extra && <a href={p.extra.href} className="text-accent hover:underline">{`${p.extra.label} →`}</a>}
+                  <a href={`${GITHUB}/${p.key}`} className="text-muted hover:text-ink">{`${t.code} ↗`}</a>
                 </div>
               </article>
             );
@@ -117,13 +121,19 @@ export default function App() {
           <p className="mt-3 max-w-xl text-white/80">{t.contactText}</p>
           <div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold">
             <a href={`mailto:${EMAIL}`} className="rounded-xl bg-white px-5 py-3 text-ink">{EMAIL}</a>
-            <a href="https://www.linkedin.com/" className="rounded-xl border border-white/30 px-5 py-3">LinkedIn</a>
-            <a href={GITHUB} className="rounded-xl border border-white/30 px-5 py-3">GitHub</a>
+                        <a href={GITHUB} className="rounded-xl border border-white/30 px-5 py-3">GitHub</a>
           </div>
         </div>
       </section>
 
-      <footer className="pb-10 text-center text-xs text-muted">{t.footer}</footer>
+      <footer className="pb-10 text-center text-xs text-muted">
+        <div>{t.footer}</div>
+        <div className="mt-2">
+          <a href="./llms.txt" className="hover:text-ink">llms.txt</a>
+          <span className="mx-2">·</span>
+          <a href="./profile.json" className="hover:text-ink">profile.json</a>
+        </div>
+      </footer>
     </div>
   );
 }

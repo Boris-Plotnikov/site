@@ -1,5 +1,20 @@
 export type Lang = "en" | "de";
 
+export const PROFILE = {
+  name: "Boris Plotnikov",
+  site: "https://boris-plotnikov.click",
+  email: "boris.a.plotnikov@gmail.com",
+  github: "https://github.com/Boris-Plotnikov",
+  location: "Vienna, Austria",
+  university: "University of Vienna",
+  hoursPerWeek: 20,
+  languages: [
+    { name: "English", level: "C2" },
+    { name: "German", level: "C1" },
+    { name: "Russian", level: "native" },
+  ],
+};
+
 export interface Project {
   key: string;
   name: string;
